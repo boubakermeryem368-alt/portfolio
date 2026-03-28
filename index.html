@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meryem BOUBAKER | Développeuse Mobile & Web</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍💻</text></svg>">
+  
+  <style>
+    /* ================= PALETTE TECH BLEU/CYAN ================= */
+    :root {
+      --primary: #00D2FF; 
+      --secondary: #3A7BD5; 
+      --dark-navy: #0F172A;
+      --deep-bg: #020617;
+      --text-light: #F1F5F9;
+      --text-dim: #94A3B8;
+      --card-bg: #1E293B;
+      --gradient: linear-gradient(135deg, #00D2FF 0%, #3A7BD5 100%);
+      --glass-bg: rgba(15, 23, 42, 0.8);
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", "Inter", sans-serif; scroll-behavior: smooth; }
+
+    body { background: var(--deep-bg); color: var(--text-light); line-height: 1.6; overflow-x: hidden; }
+
+    /* Animated background blobs */
+    .bg-blob {
+      position: fixed; width: 500px; height: 500px; border-radius: 50%; opacity: 0.1; z-index: -1; filter: blur(80px);
+      animation: floatBlob 20s infinite alternate ease-in-out;
+    }
+    .bg-blob:nth-child(1) { top: 10%; left: -100px; background: var(--primary); }
+    .bg-blob:nth-child(2) { bottom: 10%; right: -100px; background: var(--secondary); animation-delay: 5s; }
+
+    @keyframes floatBlob { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, 50px) scale(1.1); } }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* ================= NAVBAR ================= */
+    header { 
+      position: fixed; top: 0; width: 100%; background: var(--glass-bg); backdrop-filter: blur(10px);
+      z-index: 1000; border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+    }
+    nav { padding: 15px 0; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.6rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+    .nav-links { display: flex; align-items: center; gap: 25px; }
+    .nav-links a { font-weight: 500; transition: 0.3s; color: var(--text-dim); text-decoration: none; }
+    .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+
+    /* ================= HERO SECTION ================= */
+    #home { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
+    .hero-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .hero-text h1 { font-size: 3.5rem; margin-bottom: 15px; background: var(--gradient); -webkit-background-clip: text; color: transparent; }
+    .hero-text h3 { font-size: 1.5rem; color: var(--primary); margin-bottom: 20px; }
+    
+    .btn { padding: 12px 28px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: var(--transition); border: none; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+    .btn-primary { background: var(--gradient); color: white; box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3); }
+    .btn-outline { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+
+    .profile-frame { position: relative; width: 350px; height: 350px; margin: auto; }
+    .profile-image { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 5px solid rgba(0, 210, 255, 0.2); position: relative; z-index: 2; }
+    .profile-ring { position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; border-radius: 50%; border: 2px solid var(--primary); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.1); opacity: 0; } }
+
+    /* ================= ABOUT SECTION ================= */
+    #about { padding: 100px 0; text-align: center; }
+    .section-title { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
+    .title-underline { width: 60px; height: 4px; background: var(--gradient); margin: 0 auto 40px; border-radius: 10px; }
+    .about-content { max-width: 900px; margin: 0 auto; color: var(--text-dim); font-size: 1.15rem; }
+    .about-content strong { color: var(--primary); }
+    .about-actions { display: flex; justify-content: center; gap: 20px; margin-top: 40px; flex-wrap: wrap; }
+
+    /* ================= SKILLS ================= */
+    section { padding: 80px 0; }
+    h2 { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--primary); }
+    .skills-wrapper { display: flex; flex-direction: column; gap: 40px; }
+    .skill-category h3 { margin-bottom: 25px; color: var(--text-light); border-left: 4px solid var(--primary); padding-left: 15px; font-size: 1.4rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+    .skill { background: var(--card-bg); padding: 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; text-align: center; }
+    .skill:hover { border-color: var(--primary); transform: translateY(-5px); }
+    .skill i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+    .bar { height: 6px; background: #0F172A; border-radius: 10px; margin-top: 15px; overflow: hidden; }
+    .bar span { display: block; height: 100%; background: var(--gradient); border-radius: 10px; }
+
+    /* ================= PROJECTS ================= */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; }
+    .project { background: var(--card-bg); border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+    .project:hover { transform: translateY(-10px); border-color: var(--primary); }
+    .project-img { height: 160px; background: rgba(15, 23, 42, 0.5); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; color: var(--primary); }
+    .project-content { padding: 25px; }
+    .tech-tag { background: rgba(0, 210, 255, 0.1); color: var(--primary); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; margin-right: 5px; display: inline-block; margin-top: 10px; }
+
+    /* ================= CONTACT ================= */
+    form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+    input, textarea { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; color: white; outline: none; transition: 0.3s; }
+    input:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(0, 210, 255, 0.2); }
+
+    /* ================= FOOTER ================= */
+    footer { text-align: center; padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; }
+    .social-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 25px; }
+    .social-links a { font-size: 1.8rem; color: var(--text-dim); transition: 0.3s; }
+    .social-links a:hover { color: var(--primary); transform: translateY(-5px); }
+
+    @media (max-width: 768px) {
+      .hero-container { grid-template-columns: 1fr; text-align: center; }
+      .nav-links { display: none; }
+      .hero-text h1 { font-size: 2.5rem; }
+      .profile-frame { width: 280px; height: 280px; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="bg-blob"></div>
+  <div class="bg-blob"></div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo"><i class="fas fa-code"></i> Meryem</div>
+        <div class="nav-links">
+          <a href="#home" class="active">Accueil</a>
+          <a href="#about">À Propos</a>
+          <a href="#skills">Compétences</a>
+          <a href="#projects">Projets</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a href="CV-Meryem.pdf.pdf" target="_blank" class="btn btn-outline" style="padding: 8px 20px;">
+          <i class="fas fa-file-pdf"></i> Voir mon CV
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="home">
+    <div class="container">
+      <div class="hero-container">
+        <div class="hero-text">
+          <h1>Bonjour, je suis Meryem BOUBAKER</h1>
+          <h3>Développeuse Mobile & Web</h3>
+          <p>Passionnée par l'innovation technologique, je conçois des solutions numériques modernes et performantes pour répondre aux défis de demain.</p>
+          <div style="margin-top: 30px; display: flex; gap: 15px;">
+            <a href="#contact" class="btn btn-primary">Me Contacter</a>
+            <a href="#projects" class="btn btn-outline">Voir mes Projets</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="profile-frame">
+            <div class="profile-ring"></div>
+            <img src="portfolio.jpeg" alt="Meryem Boubaker" class="profile-image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">À Propos de Moi</h2>
+      <div class="title-underline"></div>
+      
+      <div class="about-content">
+        <p>
+          Je suis <strong>Meryem BOUBAKER</strong>, une développeuse passionnée par la création d'applications intuitives et impactantes. 
+          Spécialisée en <strong>Développement Mobile</strong> et Web, j'allie rigueur technique et design moderne pour offrir une expérience utilisateur (UX) optimale.
+        </p>
+        <br>
+        <p>
+          Mon parcours est marqué par la réalisation de projets concrets tels que <strong>Dima Meak</strong>, une application inclusive dédiée à l'accessibilité, 
+          et <strong>Bijox</strong>, une plateforme e-commerce moderne. Je maîtrise des outils comme <strong>Kotlin, Jetpack Compose, Flutter et PHP</strong>.
+        </p>
+      </div>
+
+      <div class="about-actions">
+          <a href="#contact" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i> Me Contacter
+          </a>
+          <a href="CV-Meryem.pdf.pdf" target="_blank" class="btn-outline btn">
+            <i class="fas fa-file-download"></i> Télécharger CV
+          </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+  <div class="container">
+    <h2>Mes Compétences</h2>
+    
+    <div class="skills-wrapper">
+      
+      <div class="skill-category">
+        <h3>Développement Mobile</h3>
+        <div class="skills-grid">
+          <div class="skill">
+            <i class="fab fa-kotlin"></i> <h4>Kotlin & Jetpack Compose</h4>
+            <div class="bar"><span style="width: 85%"></span></div>
+          </div>
+          <div class="skill">
+            <i class="fab fa-java"></i> <h4>Java</h4>
+            <div class="bar"><span style="width: 80%"></span></div>
+          </div>
+          <div class="skill">
+            <i class="fas fa-mobile-alt"></i> <h4>Flutter</h4>
+            <div class="bar"><span style="width: 75%"></span></div>
+          </div>
+          <div class="skill">
+            <i class="fas fa-database"></i> <h4>SQLite</h4>
+            <div class="bar"><span style="width: 70%"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3>Développement Web</h3>
+        <div class="skills-grid">
+          <div class="skill">
+            <i class="fab fa-php"></i> <h4>PHP & MySQL</h4>
+            <div class="bar"><span style="width: 80%"></span></div>
+          </div>
+          <div class="skill">
+            <i class="fab fa-js"></i> <h4>JavaScript</h4>
+            <div class="bar"><span style="width: 85%"></span></div>
+          </div>
+          <div class="skill">
+            <i class="fab fa-html5"></i> <h4>HTML5 / CSS3</h4>
+            <div class="bar"><span style="width: 95%"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-category">
+        <h3>Outils & Concepts</h3>
+        <div class="skills-grid">
+          <div class="skill">
+            <i class="fab fa-github"></i> <h4>GitHub & Git</h4>
+            <div class="bar"><span style="width: 90%"></span></div>
+          </div>
+          <div class="skill">
+            <i class="fas fa-pencil-ruler"></i> <h4>Conception UI/UX</h4>
+            <div class="bar"><span style="width: 85%"></span></div>
+          </div>
+          <div class="skill">
+            <i class="fas fa-project-diagram"></i> <h4>POO (Java/Kotlin)</h4>
+            <div class="bar"><span style="width: 80%"></span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <section id="projects">
+    <div class="container">
+      <h2>Mes Projets</h2>
+      <div class="projects-grid">
+        <div class="project">
+          <div class="project-img"><i class="fas fa-hands-helping"></i></div>
+          <div class="project-content">
+            <h4>Dima Meak</h4>
+            <p>Application sociale inclusive pour les personnes à besoins spécifiques au Maroc.</p>
+            <span class="tech-tag">Flutter</span><span class="tech-tag">Firebase</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-img"><i class="fas fa-gem"></i></div>
+          <div class="project-content">
+            <h4>Bijox</h4>
+            <p>Application mobile E-commerce moderne pour la vente de bijoux.</p>
+            <span class="tech-tag">Kotlin</span><span class="tech-tag">Jetpack Compose</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-img"><i class="fas fa-mobile-alt"></i></div>
+          <div class="project-content">
+            <h4>TechMRGlob</h4>
+            <p>Interface vitrine responsive et moderne pour matériel de téléphonie.</p>
+            <span class="tech-tag">HTML5/CSS3</span><span class="tech-tag">UI Design</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-img"><i class="fas fa-id-card"></i></div>
+          <div class="project-content">
+            <h4>Carte Stagiaire</h4>
+            <p>Plateforme interactive permettant l'affichage fluide des données stagiaires.</p>
+            <span class="tech-tag">JavaScript</span><span class="tech-tag">Responsive</span>
+          </div>
+        </div>
+        <div class="project">
+        <div class="project-img"><i class="fas fa-code"></i></div>
+        <div class="project-content">
+          <h4>Mini Projets Académiques</h4>
+          <p>Série de réalisations web et mobiles pour renforcer les bases techniques.</p>
+          <span class="tech-tag">PHP</span><span class="tech-tag">MySQL</span><span class="tech-tag">Git</span>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <form id="contact-form">
+        <input type="text" id="name" placeholder="Votre Nom" required>
+        <input type="email" id="email" placeholder="Votre Email" required>
+        <textarea id="message" rows="5" placeholder="Votre Message" required></textarea>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Envoyer sur WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="https://github.com/boubakermeryem368-alt" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/meryem-boubaker-bab205339/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/212772521745" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <p>© 2026 Meryem BOUBAKER. Designé avec passion | Blue Tech Theme.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      const phone = "212772521745"; 
+      const text = `Bonjour Meryem, %0A%0A*Nom:* ${name}%0A*Email:* ${email}%0A*Message:* ${message}`;
+      window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+    });
+  </script>
+</body>
+</html>
